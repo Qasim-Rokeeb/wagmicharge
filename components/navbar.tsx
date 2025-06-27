@@ -6,6 +6,9 @@ import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { Button } from "@/components/ui/button"
 import { Home, Phone, Zap, Wallet, User, Menu, X } from "lucide-react"
 import { useState } from "react"
+import dynamic from "next/dynamic"
+
+const AuthModal = dynamic(() => import('./AuthModal'), { ssr: false })
 
 const navigation = [
   { name: "Home", href: "/", icon: Home },
@@ -18,6 +21,7 @@ const navigation = [
 export function Navbar() {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [showAuth, setShowAuth] = useState(false)
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 gentle-shadow">
@@ -63,6 +67,9 @@ export function Navbar() {
             <div className="hidden md:block">
               <ConnectButton />
             </div>
+            <button className="btn btn-outline" onClick={() => setShowAuth(true)}>
+              Sign Up / Login
+            </button>
 
             {/* Mobile menu button */}
             <Button
@@ -105,6 +112,32 @@ export function Navbar() {
           </div>
         )}
       </div>
+      {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
     </nav>
   )
 }
+
+import React from "react";
+
+interface AuthModalProps {
+  onClose: () => void;
+}
+
+const AuthModal: React.FC<AuthModalProps> = ({ onClose }) => {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+      <div className="bg-white rounded-lg shadow-lg p-6 min-w-[300px]">
+        <h2 className="text-lg font-bold mb-4">Sign Up / Login</h2>
+        {/* Add your authentication form or content here */}
+        <button
+          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          onClick={onClose}
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default AuthModal;

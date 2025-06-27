@@ -1,4 +1,5 @@
 import { ProfileDetails } from "@/components/profile-details"
+import { SmartWalletDetails } from "@/components/SmartWalletDetails"
 
 export default function ProfilePage() {
   return (
@@ -12,6 +13,8 @@ export default function ProfilePage() {
         </div>
 
         <ProfileDetails />
+        {/* Show wallet details */}
+        <SmartWalletDetails walletAddress={""} />
       </div>
     </div>
   )
