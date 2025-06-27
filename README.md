@@ -1,30 +1,51 @@
-# WagmiCharge application
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+# 🔋 WagmiCharge — Crypto to Airtime Top-Up App
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/qasim-rokeebs-projects/v0-wagmi-charge-application)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/2bRdxSqVCBP)
+WagmiCharge is a Web3-powered utility platform that allows users to **convert cryptocurrency into mobile airtime** instantly. Designed for users in Africa, the app brings a seamless crypto payment experience with support for major telecom networks.
 
-## Overview
+---
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+## 🌍 Features
 
-## Deployment
+- 🔗 Connect your crypto wallet (MetaMask, WalletConnect)
+- 📱 Select mobile network (MTN, Airtel, Glo, 9mobile)
+- 💵 Input airtime amount (in Naira)
+- 💱 Real-time crypto conversion (via CoinGecko API)
+- 🚀 Instantly top up airtime using ETH, USDT, or BNB
+- 📜 Optional: View transaction history
 
-Your project is live at:
+---
 
-**[https://vercel.com/qasim-rokeebs-projects/v0-wagmi-charge-application](https://vercel.com/qasim-rokeebs-projects/v0-wagmi-charge-application)**
+## 🖥️ Tech Stack
 
-## Build your app
+- **Frontend**: React.js, Tailwind CSS
+- **Web3**: Wagmi, Ethers.js, RainbowKit
+- **Crypto Price API**: CoinGecko
+- **Airtime API**: (e.g., Reloadly or custom API)
+- **Hosting**: Vercel
 
-Continue building your app on:
+---
 
-**[https://v0.dev/chat/projects/2bRdxSqVCBP](https://v0.dev/chat/projects/2bRdxSqVCBP)**
+## 📦 Installation
 
-## How It Works
+```bash
+git clone https://github.com/qasim-rokeeb/wagmicharge.git
+cd wagmicharge
+npm install
+npm run dev
+````
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+---
+
+## 🤝 Contributing
+
+PRs are welcome! If you’d like to contribute, feel free to fork this repo and submit a pull request.
+
+---
+
+## 📜 License
+
+MIT © [Qasim Rokeeb](https://github.com/qasim-rokeeb)
+
+```
+
