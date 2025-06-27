@@ -2,7 +2,7 @@
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { CheckCircle, Clock, X } from "lucide-react"
+import { CheckCircle, X } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 
 interface TransactionModalProps {
@@ -22,8 +22,8 @@ interface TransactionModalProps {
 
 export function TransactionModal({ isOpen, onClose, isProcessing, type, details }: TransactionModalProps) {
   const getStatusIcon = () => {
-    if (isProcessing) return <Clock className="h-8 w-8 text-yellow-500 animate-spin" />
-    return <CheckCircle className="h-8 w-8 text-green-500" />
+    if (isProcessing) return <div className="w-8 h-8 pin-blue-spinner mx-auto" />
+    return <CheckCircle className="h-8 w-8 text-green-500 mx-auto" />
   }
 
   const getStatusText = () => {
@@ -42,11 +42,11 @@ export function TransactionModal({ isOpen, onClose, isProcessing, type, details 
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md bg-white border-0 gentle-shadow">
         <DialogHeader>
-          <DialogTitle className="flex items-center justify-between">
+          <DialogTitle className="flex items-center justify-between text-gray-900">
             Transaction Status
-            <Button variant="ghost" size="sm" onClick={onClose}>
+            <Button variant="ghost" size="sm" onClick={onClose} className="hover:bg-gray-100">
               <X className="h-4 w-4" />
             </Button>
           </DialogTitle>
@@ -57,69 +57,69 @@ export function TransactionModal({ isOpen, onClose, isProcessing, type, details 
           <div className="flex flex-col items-center text-center space-y-4">
             {getStatusIcon()}
             <div>
-              <h3 className="text-lg font-semibold">{getStatusText()}</h3>
-              <p className="text-sm text-muted-foreground mt-1">{getStatusDescription()}</p>
+              <h3 className="text-lg font-semibold text-gray-900">{getStatusText()}</h3>
+              <p className="text-sm text-gray-600 mt-1">{getStatusDescription()}</p>
             </div>
           </div>
 
           {/* Transaction Details */}
-          <Card>
+          <Card className="bg-blue-50 border border-blue-200">
             <CardContent className="p-4 space-y-3">
-              <h4 className="font-semibold text-sm">Transaction Details</h4>
+              <h4 className="font-semibold text-sm text-gray-900">Transaction Details</h4>
 
               {type === "airtime" ? (
                 <>
                   <div className="flex justify-between text-sm">
-                    <span>Network:</span>
-                    <span>{details.network}</span>
+                    <span className="text-gray-600">Network:</span>
+                    <span className="text-gray-900 font-medium">{details.network}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span>Phone:</span>
-                    <span>{details.phone}</span>
+                    <span className="text-gray-600">Phone:</span>
+                    <span className="text-gray-900 font-medium">{details.phone}</span>
                   </div>
                 </>
               ) : (
                 <>
                   <div className="flex justify-between text-sm">
-                    <span>Service:</span>
-                    <span>{details.service}</span>
+                    <span className="text-gray-600">Service:</span>
+                    <span className="text-gray-900 font-medium">{details.service}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span>Account:</span>
-                    <span>{details.accountNumber}</span>
+                    <span className="text-gray-600">Account:</span>
+                    <span className="text-gray-900 font-medium">{details.accountNumber}</span>
                   </div>
                 </>
               )}
 
               <div className="flex justify-between text-sm">
-                <span>Amount:</span>
-                <span>₦{details.amount ? Number.parseFloat(details.amount).toLocaleString() : "0"}</span>
+                <span className="text-gray-600">Amount:</span>
+                <span className="text-gray-900 font-medium">
+                  ₦{details.amount ? Number.parseFloat(details.amount).toLocaleString() : "0"}
+                </span>
               </div>
               <div className="flex justify-between text-sm">
-                <span>Crypto Paid:</span>
-                <span>{details.cryptoAmount} USDC</span>
+                <span className="text-gray-600">Crypto Paid:</span>
+                <span className="pin-blue-gradient-text font-medium">{details.cryptoAmount} USDC</span>
               </div>
 
               {!isProcessing && (
-                <div className="flex justify-between text-sm pt-2 border-t">
-                  <span>Transaction ID:</span>
-                  <span className="font-mono text-xs">0x1234...5678</span>
+                <div className="flex justify-between text-sm pt-2 border-t border-blue-200">
+                  <span className="text-gray-600">Transaction ID:</span>
+                  <span className="font-mono text-xs text-gray-900">0x1234...5678</span>
                 </div>
               )}
             </CardContent>
           </Card>
 
           {/* Action Buttons */}
-          <div className="flex space-x-3">
-            {!isProcessing && (
-              <>
-                <Button variant="outline" className="flex-1 bg-transparent" onClick={onClose}>
-                  Close
-                </Button>
-                <Button className="flex-1">View Receipt</Button>
-              </>
-            )}
-          </div>
+          {!isProcessing && (
+            <div className="flex space-x-3">
+              <Button variant="outline" className="flex-1 bg-white hover:bg-gray-50 border-gray-300" onClick={onClose}>
+                Close
+              </Button>
+              <Button className="flex-1 pin-blue-gradient hover:opacity-90">View Receipt</Button>
+            </div>
+          )}
         </div>
       </DialogContent>
     </Dialog>

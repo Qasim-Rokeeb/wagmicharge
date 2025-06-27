@@ -2,13 +2,17 @@ import { ProfileDetails } from "@/components/profile-details"
 
 export default function ProfilePage() {
   return (
-    <div className="container mx-auto px-4 py-8 max-w-2xl">
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold mb-4">Profile Settings 👤</h1>
-        <p className="text-lg text-muted-foreground">Manage your account settings and security</p>
-      </div>
+    <div className="min-h-screen bg-white">
+      <div className="container mx-auto px-4 py-12 max-w-2xl">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            <span className="pin-blue-gradient-text">Profile Settings</span>
+          </h1>
+          <p className="text-lg text-gray-600">Manage your account settings and security</p>
+        </div>
 
-      <ProfileDetails />
+        <ProfileDetails />
+      </div>
     </div>
   )
 }
