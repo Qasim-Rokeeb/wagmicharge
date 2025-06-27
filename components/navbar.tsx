@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
-import { ThemeToggle } from "./theme-toggle"
 import { Button } from "@/components/ui/button"
 import { Home, Phone, Zap, Wallet, User, Menu, X } from "lucide-react"
 import { useState } from "react"
@@ -21,17 +20,17 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <nav className="sticky top-0 z-50 w-full glass-effect dark:glass-effect-dark border-b border-border/50">
+    <nav className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 gentle-shadow">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+            <div className="w-10 h-10 rounded-xl pin-blue-gradient flex items-center justify-center hover-lift">
               <span className="text-white font-bold text-lg">W</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-bold gradient-text">WagmiCharge</span>
-              <span className="text-xs text-muted-foreground">Crypto Payments</span>
+              <span className="text-xl font-bold text-gray-900">WagmiCharge</span>
+              <span className="text-xs text-gray-500">Crypto Payments</span>
             </div>
           </Link>
 
@@ -45,10 +44,10 @@ export function Navbar() {
                   <Button
                     variant={isActive ? "default" : "ghost"}
                     size="sm"
-                    className={`flex items-center space-x-2 transition-all duration-300 ${
+                    className={`flex items-center space-x-2 transition-all duration-200 ${
                       isActive
-                        ? "gradient-primary text-white shadow-lg"
-                        : "hover:bg-blue-50 dark:hover:bg-slate-800 hover:text-blue-600 dark:hover:text-blue-400"
+                        ? "pin-blue-gradient text-white gentle-shadow"
+                        : "hover:bg-blue-50 hover:text-primary text-gray-600"
                     }`}
                   >
                     <Icon className="h-4 w-4" />
@@ -61,13 +60,17 @@ export function Navbar() {
 
           {/* Right side */}
           <div className="flex items-center space-x-4">
-            <ThemeToggle />
             <div className="hidden md:block">
               <ConnectButton />
             </div>
 
             {/* Mobile menu button */}
-            <Button variant="ghost" size="sm" className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="md:hidden text-gray-600 hover:text-primary hover:bg-blue-50"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
@@ -75,7 +78,7 @@ export function Navbar() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-border/50 py-4">
+          <div className="md:hidden border-t border-gray-200 py-4">
             <div className="flex flex-col space-y-2">
               {navigation.map((item) => {
                 const Icon = item.icon
@@ -85,7 +88,9 @@ export function Navbar() {
                     <Button
                       variant={isActive ? "default" : "ghost"}
                       size="sm"
-                      className={`w-full justify-start space-x-2 ${isActive ? "gradient-primary text-white" : ""}`}
+                      className={`w-full justify-start space-x-2 ${
+                        isActive ? "pin-blue-gradient text-white" : "hover:bg-blue-50 hover:text-primary text-gray-600"
+                      }`}
                     >
                       <Icon className="h-4 w-4" />
                       <span>{item.name}</span>
@@ -93,7 +98,7 @@ export function Navbar() {
                   </Link>
                 )
               })}
-              <div className="pt-4 border-t border-border/50">
+              <div className="pt-4 border-t border-gray-200">
                 <ConnectButton />
               </div>
             </div>
