@@ -44,6 +44,6 @@ PRs are welcome! If you’d like to contribute, feel free to fork this repo and 
 
 ## 📜 License
 
-MIT © [wagmicharge]((https://github.com/Qasim-Rokeeb/wagmicharge))
+MIT © [wagmicharge](https://github.com/Qasim-Rokeeb/wagmicharge)
 
 \`\`\`
