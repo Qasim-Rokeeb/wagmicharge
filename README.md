@@ -1,4 +1,3 @@
-
 # 🔋 WagmiCharge — Crypto to Airtime Top-Up App
 
 WagmiCharge is a Web3-powered utility platform that allows users to **convert cryptocurrency into mobile airtime** instantly. Designed for users in Africa, the app brings a seamless crypto payment experience with support for major telecom networks.
@@ -28,12 +27,12 @@ WagmiCharge is a Web3-powered utility platform that allows users to **convert cr
 
 ## 📦 Installation
 
-```bash
+\`\`\`bash
 git clone https://github.com/qasim-rokeeb/wagmicharge.git
 cd wagmicharge
 npm install
 npm run dev
-````
+\`\`\``
 
 ---
 
@@ -47,5 +46,4 @@ PRs are welcome! If you’d like to contribute, feel free to fork this repo and 
 
 MIT © [Qasim Rokeeb](https://github.com/qasim-rokeeb)
 
-```
-
+\`\`\`
