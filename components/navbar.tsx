@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { Button } from "@/components/ui/button"
 import { Home, Phone, Zap, Wallet, User, Menu, X } from "lucide-react"
 import { useState } from "react"
@@ -64,9 +63,9 @@ export function Navbar() {
 
           {/* Right side */}
           <div className="flex items-center space-x-4">
-            <div className="hidden md:block">
+            {/* <div className="hidden md:block">
               <ConnectButton />
-            </div>
+            </div> */}
             <button className="btn btn-outline" onClick={() => setShowAuth(true)}>
               Sign Up / Login
             </button>
@@ -105,9 +104,9 @@ export function Navbar() {
                   </Link>
                 )
               })}
-              <div className="pt-4 border-t border-gray-200">
+              {/* <div className="pt-4 border-t border-gray-200">
                 <ConnectButton />
-              </div>
+              </div> */}
             </div>
           </div>
         )}
@@ -116,28 +115,3 @@ export function Navbar() {
     </nav>
   )
 }
-
-import React from "react";
-
-interface AuthModalProps {
-  onClose: () => void;
-}
-
-const AuthModal: React.FC<AuthModalProps> = ({ onClose }) => {
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-      <div className="bg-white rounded-lg shadow-lg p-6 min-w-[300px]">
-        <h2 className="text-lg font-bold mb-4">Sign Up / Login</h2>
-        {/* Add your authentication form or content here */}
-        <button
-          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-          onClick={onClose}
-        >
-          Close
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export default AuthModal;
