@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
+    "@passwordless-id/webauthn": "^2.3.0",
     "@radix-ui/react-accordion": "latest",
     "@radix-ui/react-alert-dialog": "latest",
     "@radix-ui/react-aspect-ratio": "latest",
@@ -45,6 +46,8 @@
     "cmdk": "latest",
     "date-fns": "4.1.0",
     "embla-carousel-react": "latest",
+    "ethers": "^6.14.4",
+    "firebase": "^11.9.1",
     "input-otp": "latest",
     "lucide-react": "^0.454.0",
     "next": "15.2.4",
@@ -64,6 +67,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@types/firebase": "^2.4.32",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
