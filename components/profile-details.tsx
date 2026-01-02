@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { useAccount } from "wagmi"
-import { Shield, Key, Users, Download, Eye, EyeOff, AlertTriangle } from "lucide-react"
+import { Shield, Key, Users, Download, Eye, EyeOff, AlertTriangle, CheckCircle } from "lucide-react"
 import { useState } from "react"
 
 export function ProfileDetails() {
@@ -20,92 +20,115 @@ export function ProfileDetails() {
 
   if (!isConnected) {
     return (
-      <div className="text-center py-12">
-        <div className="text-6xl mb-4">🔒</div>
-        <h2 className="text-2xl font-semibold mb-4">Connect Your Wallet</h2>
-        <p className="text-muted-foreground">Please connect your wallet to access your profile</p>
+      <div className="text-center py-16">
+        <div className="w-20 h-20 rounded-2xl bg-blue-50 flex items-center justify-center mx-auto mb-6">
+          <span className="text-4xl">🔒</span>
+        </div>
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Connect Your Wallet</h2>
+        <p className="text-gray-600 max-w-md mx-auto">Please connect your wallet to access your profile</p>
       </div>
     )
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Account Information */}
-      <Card>
+      <Card className="minimal-card border-0">
         <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
-            <span>👤</span>
+          <CardTitle className="flex items-center space-x-3 text-gray-900">
+            <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
+              <span className="text-xl">👤</span>
+            </div>
             <span>Account Information</span>
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="email">Email Address</Label>
-            <div className="flex space-x-2">
+        <CardContent className="space-y-6">
+          <div className="space-y-3">
+            <Label htmlFor="email" className="text-base font-semibold text-gray-900">
+              Email Address
+            </Label>
+            <div className="flex space-x-3">
               <Input
                 id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={!isEditing}
-                className="flex-1"
+                className="minimal-input pin-blue-focus border-gray-300 flex-1"
               />
-              <Button variant="outline" onClick={() => setIsEditing(!isEditing)}>
+              <Button
+                variant="outline"
+                onClick={() => setIsEditing(!isEditing)}
+                className="bg-white hover:bg-blue-50 hover:text-primary hover:border-primary border-gray-300"
+              >
                 {isEditing ? "Save" : "Edit"}
               </Button>
             </div>
           </div>
 
-          <div className="space-y-2">
-            <Label>Wallet Address</Label>
-            <div className="font-mono text-sm bg-muted p-3 rounded-lg">{address}</div>
+          <div className="space-y-3">
+            <Label className="text-base font-semibold text-gray-900">Wallet Address</Label>
+            <div className="font-mono text-sm bg-gray-50 p-4 rounded-lg border border-gray-200 text-gray-900">
+              {address}
+            </div>
           </div>
 
-          <div className="space-y-2">
-            <Label>Account Status</Label>
-            <div className="flex items-center space-x-2">
-              <Badge variant="secondary" className="bg-green-500 text-white">
-                Verified
+          <div className="space-y-3">
+            <Label className="text-base font-semibold text-gray-900">Account Status</Label>
+            <div className="flex items-center space-x-3">
+              <Badge className="success-state border flex items-center space-x-2">
+                <CheckCircle className="w-4 h-4" />
+                <span>Verified</span>
               </Badge>
-              <Badge variant="outline">Smart Wallet Enabled</Badge>
+              <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
+                Smart Wallet Enabled
+              </Badge>
             </div>
           </div>
         </CardContent>
       </Card>
 
       {/* Security Settings */}
-      <Card>
+      <Card className="minimal-card border-0">
         <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
-            <Shield className="h-5 w-5" />
+          <CardTitle className="flex items-center space-x-3 text-gray-900">
+            <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
+              <Shield className="h-5 w-5 text-primary" />
+            </div>
             <span>Security Settings</span>
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-8">
           {/* Passkey */}
           <div className="flex items-center justify-between">
             <div className="space-y-1">
-              <div className="font-semibold flex items-center space-x-2">
-                <Key className="h-4 w-4" />
+              <div className="font-semibold flex items-center space-x-2 text-gray-900">
+                <Key className="h-4 w-4 text-primary" />
                 <span>Passkey Authentication</span>
               </div>
-              <p className="text-sm text-muted-foreground">Secure login with biometric authentication</p>
+              <p className="text-sm text-gray-600">Secure login with biometric authentication</p>
             </div>
-            <Badge variant="secondary" className="bg-green-500 text-white">
-              Active
+            <Badge className="success-state border flex items-center space-x-2">
+              <CheckCircle className="w-4 h-4" />
+              <span>Active</span>
             </Badge>
           </div>
 
-          <Separator />
+          <Separator className="bg-gray-200" />
 
           {/* Mnemonic Backup */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <div className="font-semibold">Recovery Phrase</div>
-                <p className="text-sm text-muted-foreground">Your 12-word recovery phrase for wallet access</p>
+                <div className="font-semibold text-gray-900">Recovery Phrase</div>
+                <p className="text-sm text-gray-600">Your 12-word recovery phrase for wallet access</p>
               </div>
-              <Button variant="outline" size="sm" onClick={() => setShowMnemonic(!showMnemonic)}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowMnemonic(!showMnemonic)}
+                className="bg-white hover:bg-blue-50 hover:text-primary hover:border-primary border-gray-300"
+              >
                 {showMnemonic ? (
                   <>
                     <EyeOff className="h-4 w-4 mr-2" />
@@ -121,26 +144,29 @@ export function ProfileDetails() {
             </div>
 
             {showMnemonic && (
-              <div className="space-y-3">
-                <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
-                  <div className="flex items-start space-x-2">
-                    <AlertTriangle className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mt-0.5" />
-                    <div className="text-sm text-yellow-800 dark:text-yellow-200">
+              <div className="space-y-4">
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                  <div className="flex items-start space-x-3">
+                    <AlertTriangle className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
+                    <div className="text-sm text-yellow-800">
                       <strong>Warning:</strong> Never share your recovery phrase with anyone. Store it securely offline.
                     </div>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-2 p-4 bg-muted rounded-lg font-mono text-sm">
+                <div className="grid grid-cols-3 gap-2 p-4 bg-gray-50 rounded-lg border border-gray-200 font-mono text-sm">
                   {mockMnemonic.split(" ").map((word, index) => (
                     <div key={index} className="flex items-center space-x-2">
-                      <span className="text-muted-foreground w-6">{index + 1}.</span>
-                      <span>{word}</span>
+                      <span className="text-gray-500 w-6">{index + 1}.</span>
+                      <span className="text-gray-900">{word}</span>
                     </div>
                   ))}
                 </div>
 
-                <Button variant="outline" className="w-full bg-transparent">
+                <Button
+                  variant="outline"
+                  className="w-full bg-white hover:bg-blue-50 hover:text-primary hover:border-primary border-gray-300"
+                >
                   <Download className="h-4 w-4 mr-2" />
                   Download Backup
                 </Button>
@@ -148,18 +174,22 @@ export function ProfileDetails() {
             )}
           </div>
 
-          <Separator />
+          <Separator className="bg-gray-200" />
 
           {/* Social Recovery */}
           <div className="flex items-center justify-between">
             <div className="space-y-1">
-              <div className="font-semibold flex items-center space-x-2">
-                <Users className="h-4 w-4" />
+              <div className="font-semibold flex items-center space-x-2 text-gray-900">
+                <Users className="h-4 w-4 text-primary" />
                 <span>Social Recovery</span>
               </div>
-              <p className="text-sm text-muted-foreground">Recover your wallet with trusted friends</p>
+              <p className="text-sm text-gray-600">Recover your wallet with trusted friends</p>
             </div>
-            <Button variant="outline" size="sm">
+            <Button
+              variant="outline"
+              size="sm"
+              className="bg-white hover:bg-blue-50 hover:text-primary hover:border-primary border-gray-300"
+            >
               Setup
             </Button>
           </div>
@@ -167,20 +197,22 @@ export function ProfileDetails() {
       </Card>
 
       {/* Danger Zone */}
-      <Card className="border-red-200 dark:border-red-800">
+      <Card className="bg-white border border-red-200 rounded-2xl gentle-shadow">
         <CardHeader>
-          <CardTitle className="flex items-center space-x-2 text-red-600 dark:text-red-400">
-            <AlertTriangle className="h-5 w-5" />
+          <CardTitle className="flex items-center space-x-3 text-red-600">
+            <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center">
+              <AlertTriangle className="h-5 w-5 text-red-500" />
+            </div>
             <span>Danger Zone</span>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="space-y-1">
-              <div className="font-semibold">Delete Account</div>
-              <p className="text-sm text-muted-foreground">Permanently delete your account and all data</p>
+              <div className="font-semibold text-gray-900">Delete Account</div>
+              <p className="text-sm text-gray-600">Permanently delete your account and all data</p>
             </div>
-            <Button variant="destructive" size="sm">
+            <Button variant="destructive" size="sm" className="hover:bg-red-600">
               Delete Account
             </Button>
           </div>

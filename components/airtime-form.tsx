@@ -52,12 +52,12 @@ export function AirtimeForm() {
     <>
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Network Selection */}
-        <div className="space-y-2">
-          <Label htmlFor="network" className="text-base font-semibold">
+        <div className="space-y-3">
+          <Label htmlFor="network" className="text-base font-semibold text-gray-900">
             Select Network
           </Label>
           <Select value={selectedNetwork} onValueChange={setSelectedNetwork}>
-            <SelectTrigger className="h-12 bg-white dark:bg-slate-800 border-2 border-gray-200 dark:border-slate-700 focus:border-blue-500">
+            <SelectTrigger className="minimal-input pin-blue-focus border-gray-300">
               <SelectValue placeholder="Choose your network provider" />
             </SelectTrigger>
             <SelectContent>
@@ -74,8 +74,8 @@ export function AirtimeForm() {
         </div>
 
         {/* Phone Number */}
-        <div className="space-y-2">
-          <Label htmlFor="phone" className="text-base font-semibold">
+        <div className="space-y-3">
+          <Label htmlFor="phone" className="text-base font-semibold text-gray-900">
             Phone Number
           </Label>
           <Input
@@ -84,13 +84,13 @@ export function AirtimeForm() {
             placeholder="08012345678"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
-            className="h-12 text-lg bg-white dark:bg-slate-800 border-2 border-gray-200 dark:border-slate-700 focus:border-blue-500"
+            className="minimal-input pin-blue-focus text-lg border-gray-300"
           />
         </div>
 
         {/* Amount Selection */}
         <div className="space-y-4">
-          <Label className="text-base font-semibold">Select Amount (NGN)</Label>
+          <Label className="text-base font-semibold text-gray-900">Select Amount (NGN)</Label>
           <div className="grid grid-cols-3 gap-3">
             {amounts.map((amt) => (
               <Button
@@ -98,10 +98,10 @@ export function AirtimeForm() {
                 type="button"
                 variant={amount === amt.toString() ? "default" : "outline"}
                 onClick={() => setAmount(amt.toString())}
-                className={`h-12 ${
+                className={`h-12 transition-all duration-200 ${
                   amount === amt.toString()
-                    ? "gradient-primary text-white"
-                    : "bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-slate-700 border-2"
+                    ? "pin-blue-gradient text-white gentle-shadow"
+                    : "bg-white hover:bg-blue-50 hover:text-primary hover:border-primary border-gray-300"
                 }`}
               >
                 ₦{amt.toLocaleString()}
@@ -109,13 +109,15 @@ export function AirtimeForm() {
             ))}
           </div>
 
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-3">
             <Button
               type="button"
               variant={amount === "custom" ? "default" : "outline"}
               onClick={() => setAmount("custom")}
-              className={`whitespace-nowrap ${
-                amount === "custom" ? "gradient-primary text-white" : "bg-white dark:bg-slate-800 border-2"
+              className={`whitespace-nowrap transition-all duration-200 ${
+                amount === "custom"
+                  ? "pin-blue-gradient text-white"
+                  : "bg-white hover:bg-blue-50 hover:text-primary hover:border-primary border-gray-300"
               }`}
             >
               Custom
@@ -128,7 +130,7 @@ export function AirtimeForm() {
                 onChange={(e) => setCustomAmount(e.target.value)}
                 min="50"
                 max="50000"
-                className="bg-white dark:bg-slate-800 border-2 border-gray-200 dark:border-slate-700 focus:border-blue-500"
+                className="minimal-input pin-blue-focus border-gray-300"
               />
             )}
           </div>
@@ -136,19 +138,21 @@ export function AirtimeForm() {
 
         {/* Conversion Display */}
         {finalAmount && (
-          <Card className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-slate-800 dark:to-slate-700 border-0">
+          <Card className="bg-blue-50 border border-blue-200">
             <CardContent className="p-6">
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="font-medium">Amount (NGN):</span>
-                  <span className="font-bold text-lg">₦{Number.parseFloat(finalAmount).toLocaleString()}</span>
+                  <span className="font-medium text-gray-700">Amount (NGN):</span>
+                  <span className="font-bold text-lg text-gray-900">
+                    ₦{Number.parseFloat(finalAmount).toLocaleString()}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="font-medium">Crypto Amount (USDC):</span>
-                  <span className="font-bold text-lg gradient-text">{cryptoAmount} USDC</span>
+                  <span className="font-medium text-gray-700">Crypto Amount (USDC):</span>
+                  <span className="font-bold text-lg pin-blue-gradient-text">{cryptoAmount} USDC</span>
                 </div>
-                <Separator />
-                <div className="flex justify-between text-sm text-muted-foreground">
+                <Separator className="bg-blue-200" />
+                <div className="flex justify-between text-sm text-gray-600">
                   <span>Network Fee:</span>
                   <span>~$0.50</span>
                 </div>
@@ -160,19 +164,22 @@ export function AirtimeForm() {
         {/* Submit Button */}
         <Button
           type="submit"
-          className="w-full h-14 text-lg gradient-primary hover:gradient-shadow-hover transition-all duration-300 transform hover:scale-[1.02]"
+          className="w-full h-14 text-lg pin-blue-gradient hover:opacity-90 transition-all duration-200 hover-lift font-semibold"
           disabled={!isFormValid || !isConnected || isProcessing}
         >
-          {!isConnected
-            ? "Connect Wallet First"
-            : isProcessing
-              ? "Processing..."
-              : `Buy ₦${finalAmount ? Number.parseFloat(finalAmount).toLocaleString() : "0"} Airtime`}
+          {!isConnected ? (
+            "Connect Wallet First"
+          ) : isProcessing ? (
+            <div className="flex items-center space-x-2">
+              <div className="w-5 h-5 pin-blue-spinner"></div>
+              <span>Processing...</span>
+            </div>
+          ) : (
+            `Secure your airtime • ₦${finalAmount ? Number.parseFloat(finalAmount).toLocaleString() : "0"}`
+          )}
         </Button>
 
-        {!isConnected && (
-          <p className="text-center text-sm text-muted-foreground">Please connect your wallet to continue</p>
-        )}
+        {!isConnected && <p className="text-center text-sm text-gray-500">Please connect your wallet to continue</p>}
       </form>
 
       <TransactionModal
